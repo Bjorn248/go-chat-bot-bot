@@ -1,4 +1,4 @@
-module github.com/go-chat-bot/bot
+module github.com/Bjorn248/go-chat-bot-bot
 
 require (
 	cloud.google.com/go v0.100.2
