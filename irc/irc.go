@@ -82,25 +82,6 @@ func onCTCPACTION(e *ircevent.Event) {
 		})
 }
 
-func onPING(e *ircevent.Event) {
-	fmt.Println("responding to ping")
-	b.MessageReceived(
-		&bot.ChannelData{
-			Protocol:  protocol,
-			Server:    ircConn.Server,
-			Channel:   e.Arguments[0],
-			IsPrivate: e.Arguments[0] == ircConn.GetNick()},
-		&bot.Message{
-			Text: "PONG :" + e.Message(),
-		},
-		&bot.User{
-			ID:       e.Host,
-			Nick:     e.Nick,
-			RealName: e.User,
-		},
-	)
-}
-
 func getServerName(server string) string {
 	separatorIndex := strings.LastIndex(server, ":")
 	if separatorIndex != -1 {
@@ -144,7 +125,7 @@ func SetUp(c *Config) *bot.Bot {
 	ircConn.AddCallback("001", onWelcome)
 	ircConn.AddCallback("PRIVMSG", onPRIVMSG)
 	ircConn.AddCallback("CTCP_ACTION", onCTCPACTION)
-	ircConn.AddCallback("PING", onPING)
+	ircConn.AddCallback("PING", func(e *ircevent.Event) { ircConn.SendRaw("PONG :" + e.Message()) })
 
 	return b
 }
