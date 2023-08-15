@@ -7,6 +7,7 @@ import (
 	"log"
 	"regexp"
 	"strings"
+	"time"
 
 	bot "github.com/Bjorn248/go-chat-bot-bot"
 	ircevent "github.com/thoj/go-ircevent"
@@ -130,6 +131,8 @@ func SetUp(c *Config) *bot.Bot {
 		fmt.Println("PONG :" + e.Message())
 		ircConn.SendRaw("PONG :" + e.Message())
 	})
+
+	ircConn.PingFreq = 5 * time.Minute
 
 	return b
 }
