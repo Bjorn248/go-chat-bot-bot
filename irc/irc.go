@@ -132,7 +132,7 @@ func SetUp(c *Config) *bot.Bot {
 		ircConn.SendRaw("PONG :" + e.Message())
 	})
 
-	ircConn.PingFreq = 10 * time.Minute
+	ircConn.PingFreq = 2 * time.Minute
 	ircConn.KeepAlive = 6 * time.Minute
 
 	return b
