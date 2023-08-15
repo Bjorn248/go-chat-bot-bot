@@ -125,7 +125,10 @@ func SetUp(c *Config) *bot.Bot {
 	ircConn.AddCallback("001", onWelcome)
 	ircConn.AddCallback("PRIVMSG", onPRIVMSG)
 	ircConn.AddCallback("CTCP_ACTION", onCTCPACTION)
-	ircConn.AddCallback("PING", func(e *ircevent.Event) { ircConn.SendRaw("PONG :" + e.Message()) })
+	ircConn.AddCallback("PING", func(e *ircevent.Event) {
+		fmt.Println("handling ping")
+		ircConn.SendRaw("PONG :" + e.Message())
+	})
 
 	return b
 }
