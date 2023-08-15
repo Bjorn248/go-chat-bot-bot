@@ -127,6 +127,7 @@ func SetUp(c *Config) *bot.Bot {
 	ircConn.AddCallback("CTCP_ACTION", onCTCPACTION)
 	ircConn.AddCallback("PING", func(e *ircevent.Event) {
 		fmt.Println("handling ping")
+		fmt.Println("PONG :" + e.Message())
 		ircConn.SendRaw("PONG :" + e.Message())
 	})
 
