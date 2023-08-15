@@ -8,7 +8,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/go-chat-bot/bot"
+	bot "github.com/Bjorn248/go-chat-bot-bot"
 	ircevent "github.com/thoj/go-ircevent"
 )
 
